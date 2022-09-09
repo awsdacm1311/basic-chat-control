@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+  height: '100vh';
 }
 
 .App-logo {
@@ -24,10 +28,26 @@
   color: white;
 }
 
+.App-width{
+
+  margin:auto;
+}
 .App-link {
   color: #61dafb;
 }
 
+.Conversation-frame{
+  height: 500px;
+  overflow: hidden;
+  overflow-y: scroll; 
+  position: relative;
+}
+.ConversationToBottom{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 100%;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
