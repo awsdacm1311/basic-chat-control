@@ -10,12 +10,13 @@ import MessagesList from './MessagesList';
 import React from 'react';
 
 
-function ChatControl({messages, setNewMessages, username}) {
+function ChatControl({messages, setNewMessages, username, chatname}) {
 
 
   return (
     <div className="App">
       <div className='App-width'>
+        <h5>{chatname}</h5>
         <MessagesList messageList={messages} user={username}/>
         <InputMessage data={messages} setData={setNewMessages} />
       </div>

@@ -89,7 +89,7 @@ function App() {
             </ListGroup>
           </Col>
           <Col>
-                <ChatControl messages={messages} setNewMessages={addMessages} username={user} />
+                <ChatControl messages={messages} setNewMessages={addMessages} username={user} chatname={chatName} />
           </Col>
         </Row>
       </Container>
