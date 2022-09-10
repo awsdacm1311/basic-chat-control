@@ -3,13 +3,22 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+import {  useDispatch } from 'react-redux'
+import {  addNewChat } from '../../store/chatsreducer';
+
 const NewChat = ({ show = false, setShow, chatFile, username }) => {
 
     const [chatName , setChatName] = useState("");
     const handleClose = () => setShow(false);
 
-    const addNewChat = () =>{
-        chatFile.push({name: chatName , messages:[]})
+    //const chats = useSelector(state => state.chats);
+    const dispatch = useDispatch();
+
+    const addNewChat1 = () =>{
+        //chatFile.push({name: chatName , messages:[]})
+
+        dispatch(addNewChat({name:chatName, messages:[]}));
+
         handleClose();
         setChatName("");
     }
@@ -33,7 +42,7 @@ const NewChat = ({ show = false, setShow, chatFile, username }) => {
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Close</Button>
-                    <Button variant="primary" onClick={addNewChat}>Save changes</Button>
+                    <Button variant="primary" onClick={addNewChat1}>Save changes</Button>
                 </Modal.Footer>
          
         </Modal>

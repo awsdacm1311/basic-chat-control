@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+
+import {  useSelector,useDispatch } from 'react-redux'
+import {  addNewMessage } from '../../store/chatsreducer';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -6,6 +10,8 @@ const InputMessage = ({data,setData}) => {
 
     const [username, setUsername] = useState("");
     const [text, setText] = useState("");
+    const dispatch = useDispatch();
+    const activeChat = useSelector((state)=> state.chat_reducer.selectedChat);
 
   const addMessage = (e) =>{
     e.preventDefault();
@@ -13,6 +19,8 @@ const InputMessage = ({data,setData}) => {
     var currentToCompare = data.slice();
     currentToCompare.push({username, text});
     setData(currentToCompare);
+
+    dispatch(addNewMessage({chatname:activeChat,message:{username,text}}));
 
     setUsername("");
     setText("");

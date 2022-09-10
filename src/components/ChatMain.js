@@ -9,15 +9,21 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import React, { useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import {selectChat} from '../store/chatsreducer.js'
 
-
-function ChatMain({Chats, user }) {
+function ChatMain({ user }) {
 
     const [chatName, setChatName] = useState("");
     const [messages, setMessages] = useState([]);
     const [showNewChat, setShowNewChat] = useState(false);
-  
+
+    const Chats = useSelector((state) => state.chat_reducer.chats);
+    const dispatch = useDispatch();
     const setChat = (chName) =>{
+
+      dispatch(selectChat(chName))
+
       let chat = Chats.filter(p=> p.name===chName);
       setMessages(chat[0].messages);
       setChatName(chName);
