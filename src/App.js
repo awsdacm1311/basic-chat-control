@@ -3,15 +3,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ChatControl from './components/chatcontrols/ChatControl';
+import NewChat from './components/chats/NewChat';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import React, { useState} from 'react';
 
+const user = "daniel"
 const Chats = [
   {
     name: "Chat 1 con juan",
@@ -58,6 +61,7 @@ function App() {
 
   const [chatName, setChatName] = useState("");
   const [messages, setMessages] = useState([]);
+  const [showNewChat, setShowNewChat] = useState(false);
 
   const setChat = (chName) =>{
     let chat = Chats.filter(p=> p.name===chName);
@@ -73,22 +77,25 @@ function App() {
   } 
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <ListGroup>
-            {Chats.map((chat, i) => 
-                <ListGroup.Item action key={i} onClick={()=>setChat(chat.name)}>{chat.name}</ListGroup.Item>
-            )}
-          </ListGroup>
-        </Col>
-        <Col>
-              <ChatControl messages={messages} setNewMessages={addMessages} />
-        </Col>
-      </Row>
-    </Container>
-
-    
+    <>
+      <Container>
+        <Row>
+          <Col>
+            <Button variant="primary" onClick={() => setShowNewChat(true)}>New Chat</Button>    
+            <ListGroup>
+              {Chats.map((chat, i) => 
+                  <ListGroup.Item action key={i} onClick={()=>setChat(chat.name)}>{chat.name}</ListGroup.Item>
+              )}
+            </ListGroup>
+          </Col>
+          <Col>
+                <ChatControl messages={messages} setNewMessages={addMessages} username={user} />
+          </Col>
+        </Row>
+      </Container>
+      <NewChat show={showNewChat} setShow={setShowNewChat} chatFile={Chats} username={user}/>
+             
+    </>
   );
 }
 
