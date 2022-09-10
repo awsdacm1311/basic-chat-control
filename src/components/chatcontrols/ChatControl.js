@@ -8,10 +8,11 @@ import InputMessage from './InputMessage';
 import MessagesList from './MessagesList';
 
 import React from 'react';
+import {useSelector} from 'react-redux';
 
-
-function ChatControl({messages, setNewMessages, username, chatname}) {
-
+function ChatControl({messages, setNewMessages, username}) {
+   
+    const chatname = useSelector((state) => state.chat_reducer.selectedChat)
 
   return (
     <div className="App">

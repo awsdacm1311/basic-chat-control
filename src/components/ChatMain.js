@@ -31,9 +31,6 @@ function ChatMain({ user }) {
   
     const addMessages = (newMessagesArr) =>{
       setMessages(newMessagesArr);
-  
-      let Index = Chats.findIndex(p=> p.name===chatName);
-      Chats[Index].messages = newMessagesArr;
     } 
   
     return (
