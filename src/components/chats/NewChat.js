@@ -1,17 +1,24 @@
-import React , {useState} from 'react'
+import React , {useState, useContext} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-const NewChat = ({ show = false, setShow, chatFile, username }) => {
+import { ConversationContext } from '../context/ConversationContext';
 
-    const [chatName , setChatName] = useState("");
+
+
+const NewChat = ({ show = false, setShow }) => {
+
+    const {  chats, setChats, setChatName } = useContext(ConversationContext);
+    const [newChatName, setNewChatName] = useState("");
+
     const handleClose = () => setShow(false);
 
     const addNewChat = () =>{
-        chatFile.push({name: chatName , messages:[]})
+        setChats([...chats, {name: newChatName , messages:[]}])
+        setChatName(newChatName);
         handleClose();
-        setChatName("");
+        setNewChatName("");
     }
 
     return (
@@ -26,8 +33,8 @@ const NewChat = ({ show = false, setShow, chatFile, username }) => {
                     <Form.Control
                         type="text"
                         id="inputChatName"
-                        value={chatName}
-                        onChange={(e)=>setChatName(e.target.value)}
+                        value={newChatName}
+                        onChange={(e)=>setNewChatName(e.target.value)}
                     />
                 </Modal.Body>
 

@@ -7,18 +7,20 @@ import InputMessage from './InputMessage';
 
 import MessagesList from './MessagesList';
 
-import React from 'react';
+import React, {useContext} from 'react';
+import {ConversationContext } from '../context/ConversationContext';
 
 
-function ChatControl({messages, setNewMessages, username, chatname}) {
+function ChatControl() {
 
+  const { chatName } = useContext(ConversationContext);
 
   return (
     <div className="App">
       <div className='App-width'>
-        <h5>{chatname}</h5>
-        <MessagesList messageList={messages} user={username}/>
-        <InputMessage data={messages} setData={setNewMessages} />
+        <h5>{chatName}</h5>
+        <MessagesList />
+        <InputMessage  />
       </div>
     </div>
   );

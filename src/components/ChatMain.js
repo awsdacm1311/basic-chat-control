@@ -8,27 +8,15 @@ import Button from 'react-bootstrap/Button';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import React, { useState} from 'react';
+import React, { useState, useContext} from 'react';
+import {ConversationContext} from '../components/context/ConversationContext'
 
 
-function ChatMain({Chats, user }) {
+function ChatMain() {
 
-    const [chatName, setChatName] = useState("");
-    const [messages, setMessages] = useState([]);
+    const {chats, setChat } = useContext(ConversationContext);
     const [showNewChat, setShowNewChat] = useState(false);
-  
-    const setChat = (chName) =>{
-      let chat = Chats.filter(p=> p.name===chName);
-      setMessages(chat[0].messages);
-      setChatName(chName);
-    }
-  
-    const addMessages = (newMessagesArr) =>{
-      setMessages(newMessagesArr);
-  
-      let Index = Chats.findIndex(p=> p.name===chatName);
-      Chats[Index].messages = newMessagesArr;
-    } 
+
   
     return (
       <>
@@ -37,17 +25,17 @@ function ChatMain({Chats, user }) {
             <Col>
               <Button variant="primary" onClick={() => setShowNewChat(true)}>New Chat</Button>    
               <ListGroup>
-                {Chats.map((chat, i) => 
+                {chats.map((chat, i) => 
                     <ListGroup.Item action key={i} onClick={()=>setChat(chat.name)}>{chat.name}</ListGroup.Item>
                 )}
               </ListGroup>
             </Col>
             <Col>
-                  <ChatControl messages={messages} setNewMessages={addMessages} username={user} chatname={chatName} />
+                  <ChatControl  />
             </Col>
           </Row>
         </Container>
-        <NewChat show={showNewChat} setShow={setShowNewChat} chatFile={Chats} username={user}/>
+        <NewChat show={showNewChat} setShow={setShowNewChat} />
                
       </>
     );
