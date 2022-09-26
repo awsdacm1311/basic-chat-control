@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const InputMessage = ({data,setData}) => {
+import {ConversationContext } from '../context/ConversationContext';
 
+
+const InputMessage = () => {
+
+  const {messages, addMessages } = useContext(ConversationContext)
     const [username, setUsername] = useState("");
     const [text, setText] = useState("");
 
   const addMessage = (e) =>{
     e.preventDefault();
 
-    var currentToCompare = data.slice();
+    var currentToCompare = messages.slice();
     currentToCompare.push({username, text});
-    setData(currentToCompare);
+    addMessages(currentToCompare);
 
     setUsername("");
     setText("");

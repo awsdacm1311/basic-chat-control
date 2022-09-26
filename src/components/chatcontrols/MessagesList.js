@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import '../../App.css';
 
 
@@ -7,15 +7,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Message from "./Message";
+import {ConversationContext } from '../context/ConversationContext'
 
-const MessagesList = ({messageList, user}) =>{
+const MessagesList = () =>{
+
+    const {messages, user} = useContext(ConversationContext);
 
     return (
         <div className="Conversation-frame">
             <div className="ConversationToBottom">
             <Container>
                 {
-                    messageList.map((u, i) =>
+                    messages.map((u, i) =>
                         <Row key={i}>
                             {u.username === user? <><Col /><Col><Message username={u.username} text={u.text} /></Col></>:
                                         <><Col><Message username={u.username} text={u.text} /></Col><Col /></>}
